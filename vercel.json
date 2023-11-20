@@ -1,0 +1,18 @@
+{
+  "outputDirectory": "dist/cliente",
+  "functions": {
+    "api/index.js": {
+      "includeFiles": "dist/servidor/**"
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/static/(.*)",
+      "destination": "/cliente/static/$1"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/api/index.js"
+    }
+  ]
+}

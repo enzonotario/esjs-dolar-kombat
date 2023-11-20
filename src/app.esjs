@@ -1,87 +1,38 @@
-importar { html, reactive } desde "@arrow-js/core"
-importar { tw } desde "twind"
+importar { Hono } desde "hono"
+importar { html } desde "hono/html"
+importar { kombat } desde "@/kombat.esjs"
 
-const datos = reactive({
-  valorDolar: 0,
-  alturaDolar: 0,
+exportar const app = crear Hono().basePath("/")
+
+app.obtener("/", (c) => {
+  retornar c.html(`
+	<!DOCTYPE html>
+	<html lang="es">
+		<head>
+			<meta charset="UTF-8" />
+			<link rel="icon" href="/favicon.ico" />
+			<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+			<title>Kombat.DolarApi.com</title>
+			<meta name="description" content="Cotización del Dólar en la torre de Mortal Kombat" />
+			<script type="module" src="https://cdn.skypack.dev/twind/shim"></script>
+        	<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+        	<!-- Google tag (gtag.js) -->
+			<script async src="https://www.googletagmanager.com/gtag/js?id=G-3X2J7ED0ZC"></script>
+			<script>
+				window.dataLayer = window.dataLayer || [];
+				function gtag(){dataLayer.push(arguments);}
+				gtag('js', new Date());
+
+				gtag('config', 'G-3X2J7ED0ZC');
+			</script>
+		</head>
+
+		<body style="margin: 0; padding: 0; height: 100%; min-height: calc(100dvh);">
+			${kombat()}
+		</body>
+
+	</html>
+`)
 })
 
-const app = document.getElementById("app")
-
-const billetes = [2000, 1000, 500, 200, 100, 50, 20]
-const tamañoCelda = 65
-const holguraInicial = 12
-
-funcion celda(billete) {
-  retornar html`<div class="${tw("relative h-[65px]")}">
-    <img src="./torre-celda.png" class="${tw("w-full h-full")}" alt="Celda de la torre" />
-    <div class="${tw("absolute top-[12px] left-[135px] w-[34px] h-[45px]")}">
-      <img src="./${billete}.png" class="${tw("w-full h-full object-fill rounded-[1px]")}" alt="Billete" />
-    </div>
-  </div>`
-}
-
-asincrono funcion dolar() {
-  const respuesta = esperar (
-    esperar fetch("https://dolarapi.com/v1/dolares/blue")
-  ).json()
-
-  datos.valorDolar = respuesta.venta
-
-  calcularAlturaDolar()
-
-  retornar html`<div class="${tw("absolute inset-0")}">
-	<div class="${tw("absolute inset-0 left-[75px] w-[34px] h-[46px]")}" style="top: ${datos.alturaDolar}px;">
-		<img src="./dolar.png" class="${tw("w-full h-full object-fill rounded-[1px]")}" alt="Dólar" />
-	</div>
-	<div class="${tw("absolute inset-0 left-[10px] md:left-0 w-[34px] h-[46px] flex flex-col justify-center")}" style="top: ${datos.alturaDolar}px;">
-		<span class="${tw("text-sm md:text-xl text-white font-bold z-10")}">$${datos.valorDolar}</span>
-	</div>
-  </div>`
-}
-
-funcion calcularAlturaDolar() {
-  para (var i = 0; i < billetes.longitud - 1; i++) {
-    si (datos.valorDolar >= billetes[i + 1] && datos.valorDolar < billetes[i]) {
-      datos.alturaDolar =
-        i * tamañoCelda +
-        ((billetes[i] - datos.valorDolar) / (billetes[i] - billetes[i + 1])) *
-          tamañoCelda
-      romper
-    }
-  }
-  datos.alturaDolar += holguraInicial
-}
-
-const plantilla = html`
-<div class="${tw("w-full h-full flex flex-col justify-end items-center bg-white bg-no-repeat bg-center bg-cover bg-fixed")}" style="background-image: url(./fondo.png); min-height: calc(100dvh);">
-	<div class="${tw('flex flex-col flex-grow items-center space-y-2')}">
-		<div class="${tw('mt-4 flex flex-col justify-center items-center text-center')}">
-			<a href="https://github.com/enzonotario/esjs-dolar-kombat" target="_blank" class="${tw("px-2 py-1 text-xs text-white bg-black bg-opacity-50 rounded")}">
-				GitHub
-			</a>
-		</div>
-
-		<div class="${tw('flex flex-1')}"></div>
-
-		<div class="${tw('flex flex-col justify-center items-center text-center')}">
-			<h1 class="${tw("text-sm text-white font-bold mb-[20px]")}">
-				<a href="https://kombat.dolarapi.com" target="_blank" class="${tw("underline")}">Kombat.DolarApi.com</a>
-			</h1>
-			<p class="${tw("text-xs text-white font-bold mb-[20px]")}">Datos obtenidos de <a href="https://dolarapi.com/?ref=kombat.dolarapi.com" target="_blank" class="${tw("underline")}">DolarApi.com</a></p>
-		</div>
-
-		<div class="${tw('flex flex-1')}"></div>
-
-		<div class="${tw("relative overflow-hidden w-[250px]")}" style="zoom: 140%;">
-		  ${billetes.map((billete) => celda(billete))}
-
-		  <img src="./torre-base.png" class="${tw("w-[250px] h-[63px] ml-[10px]")}" alt="Base de la torre" />
-
-		  ${await dolar()}
-		</div>
-	</div>
-</div>
-`
-
-plantilla(app)
+exportar porDefecto app

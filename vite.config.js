@@ -1,12 +1,17 @@
 import { URL, fileURLToPath } from 'node:url'
 import { defineConfig } from 'vite'
 import EsJS from '@es-js/vite-plugin-esjs'
+import devServer from '@hono/vite-dev-server'
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
     // https://github.com/es-js/esjs
     EsJS(),
+
+    devServer({
+      entry: './src/app.esjs',
+    }),
   ],
   resolve: {
     alias: {
@@ -27,6 +32,16 @@ export default defineConfig({
     port: 3000,
   },
   build: {
-    target: 'esnext',
+    outDir: './dist',
+    minify: false,
+    rollupOptions: {
+      input: './src/app.esjs',
+      output: {
+        format: 'esm',
+        entryFileNames: 'servidor/[name].js',
+        chunkFileNames: 'servidor/[name].js',
+        assetFileNames: 'servidor/[name].[ext]',
+      },
+    },
   },
 })
