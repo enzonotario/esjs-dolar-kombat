@@ -5,22 +5,23 @@
         <meta charset="UTF-8" />
         <link rel="icon" href="/favicon.ico" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>EsJS - JavaScript con sintaxis Español</title>
+        <title>Kombat.DolarApi.com</title>
+        <meta name="description" content="Cotización del Dólar en la torre de Mortal Kombat" />
         <script type="module" src="/src/main.js"></script>
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono:wght@400;700&display=swap" rel="stylesheet">
 
-        <style>
-            body {
-                font-family: 'Ubuntu Mono', sans-serif;
-                font-size: 1.2rem;
-            }
-        </style>
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-3X2J7ED0ZC"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-3X2J7ED0ZC');
+        </script>
     </head>
 
-    <body style="margin: 0; padding: 0; height: 100vh; width: 100vw;">
-        <es-terminal tema="oscuro"></es-terminal>
+    <body style="margin: 0; padding: 0; height: 100%; min-height: calc(100dvh);">
+        <div id="app" style="width: 100%; height: 100%; min-height: calc(100dvh);"></div>
     </body>
 
 </html>
