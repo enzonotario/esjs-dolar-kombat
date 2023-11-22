@@ -1,0 +1,37 @@
+importar { Hono } desde "hono"
+importar { html } desde "hono/html"
+importar { kombat } desde "./kombat.esjs"
+
+const gTagId = importar.meta.env.VITE_GTAG_ID
+
+exportar const inicio = crear Hono()
+
+inicio.obtener('/', (c) => {
+  retornar c.html(`
+	<!DOCTYPE html>
+	<html lang="es">
+		<head>
+			<meta charset="UTF-8" />
+			<link rel="icon" href="/favicon.ico" />
+			<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+			<title>Kombat.DolarApi.com</title>
+			<meta name="description" content="Cotización del Dólar en la torre de Mortal Kombat" />
+			<script type="module" src="https://cdn.skypack.dev/twind/shim"></script>
+			<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+			<!-- Google tag (gtag.js) -->
+			<script async src="https://www.googletagmanager.com/gtag/js?id=${gTagId}"></script>
+			<script>
+				window.dataLayer = window.dataLayer || [];
+				function gtag(){dataLayer.push(arguments);}
+				gtag('js', new Date());
+
+				gtag('config', '${gTagId}');
+			</script>
+		</head>
+
+		<body style="margin: 0; padding: 0; height: 100%; min-height: calc(100dvh);">
+			${kombat()}
+		</body>
+	</html>
+  `)
+})
