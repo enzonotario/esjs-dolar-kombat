@@ -1,6 +1,6 @@
-importar { Hono } desde "hono"
-importar { html } desde "hono/html"
-importar { kombat } desde "./kombat.esjs"
+importar { Hono } desde 'hono'
+importar { html } desde 'hono/html'
+importar { kombat } desde './kombat.esjs'
 
 const gTagId = importar.meta.env.VITE_GTAG_ID
 

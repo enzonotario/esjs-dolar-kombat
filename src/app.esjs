@@ -1,9 +1,9 @@
-importar { Hono } desde "hono"
-importar { html } desde "hono/html"
-importar { inicio } desde "@/rutas/inicio/inicio.esjs"
+importar { Hono } desde 'hono'
+importar { html } desde 'hono/html'
+importar { inicio } desde '@/rutas/inicio/inicio.esjs'
 
-exportar const app = crear Hono().basePath("/")
+exportar const app = crear Hono().basePath('/')
 
-app.route("/", inicio)
+app.route('/', inicio)
 
 exportar porDefecto app

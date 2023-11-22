@@ -1,71 +1,115 @@
-import { html } from 'hono/html'
+importar { html } desde 'hono/html'
 
 const billetes = [2000, 1000, 500, 200, 100, 50, 20]
 
 funcion celda(billete) {
   retornar html`<div class="relative h-[100px] ">
     <div class="absolute top-[18px] left-[54%] w-[14%] h-[70px]">
-      	<img src="/static/${billete}.png" class="w-full h-full object-fill rounded-[1px]" alt="Billete" />
+      <img
+        src="/static/${billete}.png"
+        class="w-full h-full object-fill rounded-[1px]"
+        alt="Billete"
+      />
 
-      	<div class="absolute inset-x-1 bottom-1">
-		  <div class="w-full flex flex-row justify-center items-center text-center text-[8px] text-white z-10 bg-black bg-opacity-70 rounded-[1px]">
-			<span>$</span>
-			<span>${billete}</span>
-		  </div>
-		</div>
+      <div class="absolute inset-x-1 bottom-1">
+        <div
+          class="w-full flex flex-row justify-center items-center text-center text-[8px] text-white z-10 bg-black bg-opacity-70 rounded-[1px]"
+        >
+          <span>$</span>
+          <span>${billete}</span>
+        </div>
+      </div>
     </div>
 
-    <img src="/static/torre-celda.png" class="absolute inset-0 w-full h-full z-20" alt="Celda de la torre" />
+    <img
+      src="/static/torre-celda.png"
+      class="absolute inset-0 w-full h-full z-20"
+      alt="Celda de la torre"
+    />
   </div>`
 }
 
 funcion dolar() {
-  retornar html`<div class="absolute inset-0 z-20"
-  	x-data="{ valorDolar: 0, alturaDolar: 0, obtenerValorDolar: async function() { this.valorDolar = (await (await fetch('https://dolarapi.com/v1/dolares/blue')).json()).venta; let altura = 0; const billetes = [2000, 1000, 500, 200, 100, 50, 20]; const tamañoCelda = 100; const holguraInicial = 12; for (let i = 0; i < billetes.length - 1; i++) { if (this.valorDolar >= billetes[i + 1] && this.valorDolar < billetes[i]) { altura = i * tamañoCelda + ((billetes[i] - this.valorDolar) / (billetes[i] - billetes[i + 1])) * tamañoCelda; break; } } altura += holguraInicial; this.alturaDolar = altura; } }"
-  	x-init="obtenerValorDolar()"
+  retornar html`<div
+    class="absolute inset-0 z-20"
+    x-data="{ valorDolar: 0, alturaDolar: 0, obtenerValorDolar: async function() { this.valorDolar = (await (await fetch('https://dolarapi.com/v1/dolares/blue')).json()).venta; let altura = 0; const billetes = [2000, 1000, 500, 200, 100, 50, 20]; const tamañoCelda = 100; const holguraInicial = 12; for (let i = 0; i < billetes.length - 1; i++) { if (this.valorDolar >= billetes[i + 1] && this.valorDolar < billetes[i]) { altura = i * tamañoCelda + ((billetes[i] - this.valorDolar) / (billetes[i] - billetes[i + 1])) * tamañoCelda; break; } } altura += holguraInicial; this.alturaDolar = altura; } }"
+    x-init="obtenerValorDolar()"
   >
-	<div class="absolute inset-0 left-[34%] w-[14%] h-[70px]" :style="{ top: alturaDolar + 'px' }">
-		<img src="/static/dolar.png" class="w-full h-full object-fill rounded-[1px]" alt="Dólar" />
+    <div
+      class="absolute inset-0 left-[34%] w-[14%] h-[70px]"
+      :style="{ top: alturaDolar + 'px' }"
+    >
+      <img
+        src="/static/dolar.png"
+        class="w-full h-full object-fill rounded-[1px]"
+        alt="Dólar"
+      />
 
-		<div class="absolute inset-x-1 bottom-1 flex flex-col justify-center">
-			<div class="flex flex-row justify-center">
-				<div class="flex flex-row text-xs text-white font-bold bg-black bg-opacity-70 rounded px-2 py-1">
-					<span>$</span>
-					<span x-text="valorDolar"></span>
-				</div>
-			</div>
-		</div>
-	</div>
+      <div class="absolute inset-x-1 bottom-1 flex flex-col justify-center">
+        <div class="flex flex-row justify-center">
+          <div
+            class="flex flex-row text-xs text-white font-bold bg-black bg-opacity-70 rounded px-2 py-1"
+          >
+            <span>$</span>
+            <span x-text="valorDolar"></span>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>`
 }
 
 exportar funcion kombat() {
-	retornar html`<div class="w-full h-full flex flex-col justify-end items-center bg-white bg-no-repeat bg-center bg-cover bg-fixed" style="background-image: url(/static/fondo.png); min-height: calc(100dvh);">
-		<div class="w-full flex flex-col flex-grow items-center space-y-2">
-			<div class="mt-4 flex flex-col justify-center items-center text-center">
-				<a href="https://github.com/enzonotario/esjs-dolar-kombat" target="_blank" class="px-2 py-1 text-xs text-white bg-black bg-opacity-70 rounded">
-					GitHub
-				</a>
-			</div>
+  retornar html`<div
+    class="w-full h-full flex flex-col justify-end items-center bg-white bg-no-repeat bg-center bg-cover bg-fixed"
+    style="background-image: url(/static/fondo.png); min-height: calc(100dvh);"
+  >
+    <div class="w-full flex flex-col flex-grow items-center space-y-2">
+      <div class="mt-4 flex flex-col justify-center items-center text-center">
+        <a
+          href="https://github.com/enzonotario/esjs-dolar-kombat"
+          target="_blank"
+          class="px-2 py-1 text-xs text-white bg-black bg-opacity-70 rounded"
+        >
+          GitHub
+        </a>
+      </div>
 
-			<div class="flex flex-1"></div>
+      <div class="flex flex-1"></div>
 
-			<div class="flex flex-col justify-center items-center text-center">
-				<h1 class="text-sm text-white font-bold mb-[20px]">
-					<a href="https://kombat.dolarapi.com" target="_blank" class="underline">Kombat.DolarApi.com</a>
-				</h1>
-				<p class="text-xs text-white font-bold mb-[20px]">Datos obtenidos de <a href="https://dolarapi.com/?ref=kombat.dolarapi.com" target="_blank" class="underline">DolarApi.com</a></p>
-			</div>
+      <div class="flex flex-col justify-center items-center text-center">
+        <h1 class="text-sm text-white font-bold mb-[20px]">
+          <a
+            href="https://kombat.dolarapi.com"
+            target="_blank"
+            class="underline"
+            >Kombat.DolarApi.com</a
+          >
+        </h1>
+        <p class="text-xs text-white font-bold mb-[20px]">
+          Datos obtenidos de
+          <a
+            href="https://dolarapi.com/?ref=kombat.dolarapi.com"
+            target="_blank"
+            class="underline"
+            >DolarApi.com</a
+          >
+        </p>
+      </div>
 
-			<div class="flex flex-1"></div>
+      <div class="flex flex-1"></div>
 
-			<div class="relative overflow-hidden w-full max-w-lg md:max-w-lg">
-			  ${billetes.map((billete) => celda(billete))}
+      <div class="relative overflow-hidden w-full max-w-lg md:max-w-lg">
+        ${billetes.map((billete) => celda(billete))}
 
-			  <img src="/static/torre-base.png" class="w-full h-[100px] ml-[4%]" alt="Base de la torre" />
+        <img
+          src="/static/torre-base.png"
+          class="w-full h-[100px] ml-[4%]"
+          alt="Base de la torre"
+        />
 
-			  ${dolar()}
-			</div>
-		</div>
-	</div>`
+        ${dolar()}
+      </div>
+    </div>
+  </div>`
 }

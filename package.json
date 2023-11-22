@@ -12,6 +12,8 @@
     "@es-js/vite-plugin-esjs": "^0.0.14",
     "@hono/vite-dev-server": "^0.3.0",
     "hono": "3.9.2",
+    "prettier": "^3.1.0",
+    "prettier-plugin-esjs": "^0.0.1",
     "vite": "^5.0.0"
   }
 }
