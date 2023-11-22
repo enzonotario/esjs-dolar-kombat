@@ -1,19 +1,23 @@
 importar { Hono } desde 'hono'
-
 importar { createClient } desde '@supabase/supabase-js'
+importar { qstash } desde '@/intermediarios/qstash.intermediario.esjs'
 
 exportar const og = crear Hono()
 
+og.use('*', qstash())
 og.post('/', asincrono (c) => {
   const supabase = createClient(
     importar.meta.env.VITE_SUPABASE_URL,
     importar.meta.env.VITE_SUPABASE_KEY,
   )
 
-  const url =
-    'https://api.apiflash.com/v1/urltoimage?access_key=ac8a7c7ba8064c449606dae30e476822&url=https%3A%2F%2Fkombat.dolarapi.com&format=png&width=1200&height=630'
+  const url = 'https://kombat.dolarapi.com'
 
-  const blob = esperar fetch(url).luego((r) => r.blob())
+  const apiFlashKey = importar.meta.env.VITE_APIFLASH_KEY
+
+  const blob = esperar fetch(
+    `https://api.apiflash.com/v1/urltoimage?access_key=${apiFlashKey}&url=${url}&format=png&width=1200&height=630&fresh=true`,
+  ).luego((r) => r.blob())
 
   const { data, error } = esperar supabase.storage
     .desde('og')
@@ -29,10 +33,10 @@ og.post('/', asincrono (c) => {
     })
   }
 
-  const publicURL = supabase.storage.desde('og').getPublicUrl('og.png')
+  const publicUrl = supabase.storage.desde('og').getPublicUrl('og.png')
 
   retornar c.json({
     estado: 'Correcto',
-    publicURL,
+    publicUrl: publicUrl.data.publicUrl,
   })
 })

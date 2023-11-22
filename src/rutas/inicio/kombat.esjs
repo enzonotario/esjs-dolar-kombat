@@ -78,7 +78,7 @@ exportar funcion kombat() {
       <div class="flex flex-1"></div>
 
       <div class="flex flex-col justify-center items-center text-center">
-        <h1 class="text-sm text-white font-bold mb-[20px]">
+        <h1 class="text-md md:text-xl text-white font-bold mb-[20px]">
           <a
             href="https://kombat.dolarapi.com"
             target="_blank"
@@ -86,7 +86,7 @@ exportar funcion kombat() {
             >Kombat.DolarApi.com</a
           >
         </h1>
-        <p class="text-xs text-white font-bold mb-[20px]">
+        <p class="text-sm text-white font-bold mb-[20px]">
           Datos obtenidos de
           <a
             href="https://dolarapi.com/?ref=kombat.dolarapi.com"
@@ -99,7 +99,9 @@ exportar funcion kombat() {
 
       <div class="flex flex-1"></div>
 
-      <div class="kombat-torre relative overflow-hidden w-full max-w-lg md:max-w-lg">
+      <div
+        class="kombat-torre relative overflow-hidden w-full max-w-lg md:max-w-lg"
+      >
         ${billetes.map((billete) => celda(billete))}
 
         <img

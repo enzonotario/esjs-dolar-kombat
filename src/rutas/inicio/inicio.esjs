@@ -12,7 +12,7 @@ inicio.obtener('/', (c) => {
 	<html lang="es">
 		<head>
 			<meta charset="UTF-8" />
-			<link rel="icon" href="/favicon.ico" />
+			<link rel="icon" href="/static/favicon.ico" />
 			<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 			<title>Kombat.DolarApi.com</title>
 			<meta name="description" content="Cotización del Dólar en la torre de Mortal Kombat" />

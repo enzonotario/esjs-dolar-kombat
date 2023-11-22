@@ -2,6 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: MortalKombat;
+  src: url(/static/mortalkombat3.ttf);
+}
+
+body {
+  font-family: MortalKombat, sans-serif;
+}
+
 @media (min-width: 768px) {
   .kombat-torre {
     zoom: 1.8;
