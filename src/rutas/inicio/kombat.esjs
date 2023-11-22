@@ -99,7 +99,7 @@ exportar funcion kombat() {
 
       <div class="flex flex-1"></div>
 
-      <div class="relative overflow-hidden w-full max-w-lg md:max-w-lg">
+      <div class="kombat-torre relative overflow-hidden w-full max-w-lg md:max-w-lg">
         ${billetes.map((billete) => celda(billete))}
 
         <img
