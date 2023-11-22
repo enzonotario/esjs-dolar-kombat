@@ -27,6 +27,26 @@ inicio.obtener('/', (c) => {
 
 				gtag('config', '${gTagId}');
 			</script>
+
+			<!-- OG Tags -->
+			<meta property="og:title" content="Kombat.DolarApi.com" />
+			<meta property="og:description" content="Cotización del Dólar en la torre de Mortal Kombat" />
+			<meta property="og:image" content="https://lcmcdlwmppejonttmzrh.supabase.co/storage/v1/object/public/og/og.png" />
+			<meta property="og:url" content="https://kombat.dolarapi.com" />
+			<meta property="og:type" content="website" />
+			<meta property="og:site_name" content="Kombat.DolarApi.com" />
+			<meta property="og:locale" content="es_AR" />
+
+			<!-- Twitter Tags -->
+			<meta name="twitter:card" content="summary_large_image" />
+			<meta name="twitter:site" content="@dolarapi" />
+			<meta name="twitter:creator" content="@dolarapi" />
+			<meta name="twitter:title" content="Kombat.DolarApi.com" />
+			<meta name="twitter:description" content="Cotización del Dólar en la torre de Mortal Kombat" />
+			<meta name="twitter:image" content="https://lcmcdlwmppejonttmzrh.supabase.co/storage/v1/object/public/og/og.png" />
+			<meta name="twitter:image:alt" content="Kombat.DolarApi.com" />
+			<meta name="twitter:url" content="https://kombat.dolarapi.com" />
+			<meta name="twitter:domain" content="kombat.dolarapi.com" />
 		</head>
 
 		<body style="margin: 0; padding: 0; height: 100%; min-height: calc(100dvh);">

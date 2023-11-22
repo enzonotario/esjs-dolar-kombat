@@ -1,0 +1,38 @@
+importar { Hono } desde 'hono'
+
+importar { createClient } desde '@supabase/supabase-js'
+
+exportar const og = crear Hono()
+
+og.post('/', asincrono (c) => {
+  const supabase = createClient(
+    importar.meta.env.VITE_SUPABASE_URL,
+    importar.meta.env.VITE_SUPABASE_KEY,
+  )
+
+  const url =
+    'https://api.apiflash.com/v1/urltoimage?access_key=ac8a7c7ba8064c449606dae30e476822&url=https%3A%2F%2Fkombat.dolarapi.com&format=png&width=1200&height=630'
+
+  const blob = esperar fetch(url).luego((r) => r.blob())
+
+  const { data, error } = esperar supabase.storage
+    .desde('og')
+    .upload('og.png', blob, {
+      cacheControl: 60 * 60 * 12,
+      upsert: verdadero,
+    })
+
+  si (error) {
+    retornar c.json({
+      estado: 'error',
+      error,
+    })
+  }
+
+  const publicURL = supabase.storage.desde('og').getPublicUrl('og.png')
+
+  retornar c.json({
+    estado: 'Correcto',
+    publicURL,
+  })
+})

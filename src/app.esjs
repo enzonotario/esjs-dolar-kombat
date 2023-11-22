@@ -1,9 +1,11 @@
 importar { Hono } desde 'hono'
 importar { html } desde 'hono/html'
 importar { inicio } desde '@/rutas/inicio/inicio.esjs'
+importar { og } desde '@/rutas/og/og.esjs'
 
 exportar const app = crear Hono().basePath('/')
 
 app.route('/', inicio)
+app.route('/og', og)
 
 exportar porDefecto app
