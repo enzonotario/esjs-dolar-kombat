@@ -10,12 +10,12 @@ export default defineConfig({
     EsJS(),
 
     devServer({
-      entry: './src/app.esjs',
+      entry: './api/app.esjs',
     }),
   ],
   resolve: {
     alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url)),
+      '@': fileURLToPath(new URL('./api', import.meta.url)),
     },
     extensions: [
       '.js',
@@ -35,7 +35,7 @@ export default defineConfig({
     outDir: './dist',
     minify: false,
     rollupOptions: {
-      input: './src/app.esjs',
+      input: './api/app.esjs',
       output: {
         format: 'esm',
         entryFileNames: 'servidor/[name].js',

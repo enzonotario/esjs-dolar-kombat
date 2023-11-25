@@ -11,6 +11,10 @@
       "destination": "/cliente/static/$1"
     },
     {
+      "source": "/favicon.ico",
+      "destination": "/static/favicon.ico"
+    },
+    {
       "source": "/(.*)",
       "destination": "/api/index.js"
     }

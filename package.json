@@ -5,9 +5,9 @@
   "license": "MIT",
   "scripts": {
     "dev": "vite --host",
-    "dev:css": "tailwindcss -i ./src/app.css -o ./static/app.css --watch",
+    "dev:css": "tailwindcss -i api/app.css -o ./static/app.css --watch",
     "build": "vite build --ssr --mode=production && pnpm run build:css && pnpm run build:move-static",
-    "build:css": "tailwindcss -i ./src/app.css -o ./static/app.css --minify",
+    "build:css": "tailwindcss -i api/app.css -o ./static/app.css --minify",
     "build:move-static": "mkdir -p dist/cliente && cp -r static dist/cliente",
     "serve": "vite preview"
   },
