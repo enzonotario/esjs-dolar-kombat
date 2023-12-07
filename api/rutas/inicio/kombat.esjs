@@ -32,12 +32,39 @@ funcion celda(billete) {
 funcion dolar() {
   retornar html`<div
     class="absolute inset-0 z-20"
-    x-data="{ valorDolar: 0, alturaDolar: 0, obtenerValorDolar: async function() { this.valorDolar = (await (await fetch('https://dolarapi.com/v1/dolares/blue')).json()).venta; let altura = 0; const billetes = [2000, 1000, 500, 200, 100, 50, 20]; const tamañoCelda = 100; const holguraInicial = 12; for (let i = 0; i < billetes.length - 1; i++) { if (this.valorDolar >= billetes[i + 1] && this.valorDolar < billetes[i]) { altura = i * tamañoCelda + ((billetes[i] - this.valorDolar) / (billetes[i] - billetes[i + 1])) * tamañoCelda; break; } } altura += holguraInicial; this.alturaDolar = altura; } }"
+    x-data="{
+		valorDolar: 0,
+		alturaDolar: '10%',
+		obtenerValorDolar: async function() {
+			this.valorDolar = (await (await fetch('https://dolarapi.com/v1/dolares/blue')).json()).venta;
+			let altura = 0;
+			const billetes = [2000, 1000, 500, 200, 100, 50, 20];
+			const tamañoCelda = 100;
+			const holguraInicial = 12;
+
+			for (let i = 0; i < billetes.length - 1; i++) {
+				if (this.valorDolar >= billetes[i + 1] && this.valorDolar < billetes[i]) {
+					altura = (billetes.length - i - 1) * tamañoCelda
+						+ ( (this.valorDolar - billetes[i + 1]) / (billetes[i] - billetes[i + 1]) ) * tamañoCelda;
+					break;
+				}
+			}
+
+			altura += holguraInicial;
+			this.alturaDolar = altura + 'px';
+			this.$refs.dolar.scrollIntoView({ behavior: 'smooth', block: 'center' });
+			setTimeout(() => {
+				window.scrollTo({ top: 0, behavior: 'smooth' });
+			}, 1300);
+		}
+	}"
     x-init="obtenerValorDolar()"
   >
     <div
-      class="absolute inset-0 left-[34%] w-[14%] h-[70px]"
-      :style="{ top: alturaDolar + 'px' }"
+      class="absolute inset-x-0 left-[34%] w-[14%] h-[70px]"
+      :style="{ bottom: alturaDolar }"
+      style="transition: bottom 2s ease-in-out;"
+      x-ref="dolar"
     >
       <img
         src="/static/dolar.png"
@@ -77,23 +104,33 @@ exportar funcion kombat() {
 
       <div class="flex flex-1"></div>
 
-      <div class="flex flex-col justify-center items-center text-center">
-        <h1 class="text-md md:text-xl text-white font-bold mb-[20px]">
+      <div
+        class="flex flex-col justify-center items-center text-center space-y-4"
+      >
+        <h1 class="text-md md:text-xl text-white font-bold">
           <a
             href="https://kombat.dolarapi.com"
             target="_blank"
             class="underline"
-            >Kombat.DolarApi.com</a
           >
+            Kombat.DolarApi.com
+          </a>
         </h1>
-        <p class="text-sm text-white font-bold mb-[20px]">
+        <p class="text-sm text-white font-bold">
           Datos obtenidos de
           <a
             href="https://dolarapi.com/?ref=kombat.dolarapi.com"
             target="_blank"
             class="underline"
-            >DolarApi.com</a
           >
+            DolarApi.com
+          </a>
+        </p>
+        <p class="text-sm text-white font-bold">
+          Desarrollado con
+          <a href="https://es.js.org?ref=kombat.dolarapi.com" target="_blank" class="underline">
+            EsJS
+          </a>
         </p>
       </div>
 
