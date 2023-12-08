@@ -29,42 +29,11 @@ funcion celda(billete) {
   </div>`
 }
 
-funcion dolar() {
-  retornar html`<div
-    class="absolute inset-0 z-20"
-    x-data="{
-		valorDolar: 0,
-		alturaDolar: '10%',
-		obtenerValorDolar: async function() {
-			this.valorDolar = (await (await fetch('https://dolarapi.com/v1/dolares/blue')).json()).venta;
-			let altura = 0;
-			const billetes = [2000, 1000, 500, 200, 100, 50, 20];
-			const tamañoCelda = 100;
-			const holguraInicial = 12;
-
-			for (let i = 0; i < billetes.length - 1; i++) {
-				if (this.valorDolar >= billetes[i + 1] && this.valorDolar < billetes[i]) {
-					altura = (billetes.length - i - 1) * tamañoCelda
-						+ ( (this.valorDolar - billetes[i + 1]) / (billetes[i] - billetes[i + 1]) ) * tamañoCelda;
-					break;
-				}
-			}
-
-			altura += holguraInicial;
-			this.alturaDolar = altura + 'px';
-			this.$refs.dolar.scrollIntoView({ behavior: 'smooth', block: 'center' });
-			setTimeout(() => {
-				window.scrollTo({ top: 0, behavior: 'smooth' });
-			}, 1300);
-		}
-	}"
-    x-init="obtenerValorDolar()"
-  >
+funcion dolar(valorDolar, alturaDolar) {
+  retornar html`<div class="absolute inset-0 z-20">
     <div
       class="absolute inset-x-0 left-[34%] w-[14%] h-[70px]"
-      :style="{ bottom: alturaDolar }"
-      style="transition: bottom 2s ease-in-out;"
-      x-ref="dolar"
+      style="transition: bottom 2s ease-in-out; bottom: ${alturaDolar};"
     >
       <img
         src="/static/dolar.png"
@@ -78,7 +47,7 @@ funcion dolar() {
             class="flex flex-row text-xs text-white font-bold bg-black bg-opacity-70 rounded px-2 py-1"
           >
             <span>$</span>
-            <span x-text="valorDolar"></span>
+            <span>${valorDolar}</span>
           </div>
         </div>
       </div>
@@ -86,7 +55,7 @@ funcion dolar() {
   </div>`
 }
 
-exportar funcion kombat() {
+exportar funcion kombat(valorDolar, alturaDolar) {
   retornar html`<div
     class="w-full h-full flex flex-col justify-end items-center bg-white bg-no-repeat bg-center bg-cover bg-fixed"
     style="background-image: url(/static/fondo.png); min-height: calc(100dvh);"
@@ -108,11 +77,7 @@ exportar funcion kombat() {
         class="flex flex-col justify-center items-center text-center space-y-4"
       >
         <h1 class="text-md md:text-xl text-white font-bold">
-          <a
-            href="https://kombat.dolarapi.com"
-            target="_blank"
-            class="underline"
-          >
+          <a href="https://kombat.dolarapi.com" target="_blank">
             Kombat.DolarApi.com
           </a>
         </h1>
@@ -128,7 +93,11 @@ exportar funcion kombat() {
         </p>
         <p class="text-sm text-white font-bold">
           Desarrollado con
-          <a href="https://es.js.org?ref=kombat.dolarapi.com" target="_blank" class="underline">
+          <a
+            href="https://es.js.org?ref=kombat.dolarapi.com"
+            target="_blank"
+            class="underline"
+          >
             EsJS
           </a>
         </p>
@@ -147,7 +116,7 @@ exportar funcion kombat() {
           alt="Base de la torre"
         />
 
-        ${dolar()}
+        ${dolar(valorDolar, alturaDolar)}
       </div>
     </div>
   </div>`

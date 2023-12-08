@@ -16,7 +16,7 @@ og.post('/', asincrono (c) => {
   const apiFlashKey = importar.meta.env.VITE_APIFLASH_KEY
 
   const blob = esperar fetch(
-    `https://api.apiflash.com/v1/urltoimage?access_key=${apiFlashKey}&url=${url}&format=png&width=1200&height=630&fresh=true&delay=3`,
+    `https://api.apiflash.com/v1/urltoimage?access_key=${apiFlashKey}&url=${url}&format=png&width=1200&height=630&fresh=true`,
   ).luego((r) => r.blob())
 
   const { data, error } = esperar supabase.storage
